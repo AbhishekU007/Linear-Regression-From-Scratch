@@ -1,5 +1,6 @@
 import numpy as np
 
+# Lasso Regression using coordinate descent
 class LassoRegression:
     def __init__(self, alpha=1.0, n_iters=1000, tol=1e-4):
         self.alpha = alpha
@@ -11,6 +12,7 @@ class LassoRegression:
         n_samples, n_features = X.shape
         self.weights = np.zeros(n_features)
 
+        # Coordinate descent optimization
         for _ in range(self.n_iters):
             for j in range(n_features):
                 y_pred = np.dot(X, self.weights)
@@ -18,6 +20,7 @@ class LassoRegression:
 
                 rho = np.dot(X[:, j], residual)
 
+                # Soft thresholding
                 if rho < -self.alpha / 2:
                     self.weights[j] = (rho + self.alpha / 2) / np.dot(X[:, j], X[:, j])
                 elif rho > self.alpha / 2:
@@ -28,6 +31,7 @@ class LassoRegression:
     def predict(self, X):
         return np.dot(X, self.weights)
 
+# Ridge Regression using gradient descent
 class RidgeRegression:
     def __init__(self, learning_rate=0.01, n_iters=1000, alpha=1.0):
         self.learning_rate = learning_rate
@@ -39,6 +43,7 @@ class RidgeRegression:
         n_samples, n_features = X.shape
         self.weights = np.zeros(X.shape[1])
 
+        # Gradient descent optimization
         for _ in range(self.n_iters):
             y_pred = np.dot(X, self.weights)
             gradient = (2 / n_samples) * (np.dot(X.T, (y_pred - y)) + self.alpha * self.weights)
@@ -47,6 +52,7 @@ class RidgeRegression:
     def predict(self, X):
         return np.dot(X, self.weights)
 
+# Elastic Net Regression (mix of L1 and L2)
 class ElasticNetRegression:
     def __init__(self, learning_rate=0.01, n_iters=1000, alpha=1.0, l1_ratio=0.5):
         self.learning_rate = learning_rate
@@ -61,6 +67,7 @@ class ElasticNetRegression:
         self.weights = np.zeros(n_features)
         self.bias = 0
 
+        # Gradient descent with combined L1 and L2 penalty
         for _ in range(self.n_iters):
             y_pred = np.dot(X, self.weights) + self.bias
             dw = (-2 / n_samples) * np.dot(X.T, (y - y_pred)) + self.alpha * (

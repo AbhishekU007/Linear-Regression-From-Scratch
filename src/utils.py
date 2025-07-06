@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Custom train-test split implementation
 def train_test_split(X, y, test_size=0.2, random_state=None):
     if random_state:
         np.random.seed(random_state)
@@ -14,16 +15,20 @@ def train_test_split(X, y, test_size=0.2, random_state=None):
     
     return X[train_idx], X[test_idx], y[train_idx], y[test_idx]
 
+# Min-max normalization
 def normalize(X):
     return (X - np.min(X, axis=0)) / (np.max(X, axis=0) - np.min(X, axis=0))
 
+# Standardization (zero mean, unit variance)
 def standardize(X):
     return (X - np.mean(X, axis=0)) / np.std(X, axis=0)
 
+# Add bias (column of ones) to feature matrix
 def add_bias(X):
     bias = np.ones((X.shape[0], 1))
     return np.hstack((bias, X))
 
+# Scatter plot for predicted vs actual values
 def plot_predictions(y_true, y_pred, title="Predicted vs Actual"):
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots(figsize=(6, 4))

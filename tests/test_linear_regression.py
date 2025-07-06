@@ -1,6 +1,7 @@
 import numpy as np
 from src.linear_regression import LinearRegression
 
+# Test if learned coefficients are close to expected values
 def test_coefficients_close():
     X = np.array([[1], [2], [3], [4], [5]])
     y = np.array([3, 5, 7, 9, 11])  # y = 2x + 1
@@ -14,6 +15,7 @@ def test_coefficients_close():
     assert abs(slope - 2) < 0.1
     assert abs(intercept - 1) < 0.1
 
+# Test if predictions are close to true values
 def test_predictions_close():
     X = np.array([[1], [2], [3], [4], [5]])
     y = np.array([3, 5, 7, 9, 11])

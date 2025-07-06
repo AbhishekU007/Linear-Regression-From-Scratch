@@ -1,5 +1,6 @@
 import numpy as np
 
+# Custom Linear Regression implementation
 class LinearRegression:
     def __init__(self, learning_rate=0.01, n_iterations=1000):
         self.learning_rate = learning_rate
@@ -12,6 +13,7 @@ class LinearRegression:
         self.weights = np.zeros(X.shape[1], dtype=float)
         self.bias = 0.0
 
+        # Gradient descent loop
         for _ in range(self.n_iterations):
             y_predicted = np.dot(X, self.weights) + self.bias
             
@@ -24,7 +26,9 @@ class LinearRegression:
             self.bias -= self.learning_rate * db
 
     def predict(self, X):
+        # Predict using learned weights and bias
         return np.dot(X, self.weights) + self.bias
     
     def mse(self, y_true, y_pred):
+        # Mean Squared Error calculation
         return np.mean((y_true - y_pred) ** 2)
