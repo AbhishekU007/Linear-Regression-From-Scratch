@@ -9,7 +9,46 @@ from src.regularized_regression import RidgeRegression, LassoRegression, Elastic
 
 from sklearn.linear_model import LinearRegression as SklearnLR, Ridge as SklearnRidge, Lasso as SklearnLasso, ElasticNet as SklearnElasticNet
 
+# Configure Streamlit page
+st.set_page_config(
+    page_title="Linear Regression from Scratch",
+    page_icon="📶",
+    layout="centered"
+)
+
 st.title("Regression Playground (Custom vs Scikit-learn)")
+
+# Sidebar: About the project
+st.sidebar.markdown("## About The Project")
+
+# Sidebar: Project info and styling
+st.sidebar.markdown(
+    """
+    <div class="custom-info">
+        This app predicts a target variable using Linear, Ridge, Lasso, or Elastic Net regression models — implemented from scratch and contrasted with scikit-learn.<br>
+        <ul>
+            <li>Upload your dataset</li>
+            <li>Select features and target</li>
+            <li>Compare model performance visually and numerically</li>
+        </ul>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+st.sidebar.markdown("---")
+st.sidebar.markdown(
+    """
+    <style>
+    .custom-link {
+        color: #ff4b4b !important;
+        text-decoration: none !important;
+    }
+    </style>
+    Made by <a href="https://github.com/abhisheku007" class="custom-link" target="_blank">Abhishek Upadhyay</a>
+    """,
+    unsafe_allow_html=True
+)
 
 file = st.file_uploader("Upload CSV", type=['csv'])
 
